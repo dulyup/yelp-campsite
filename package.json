@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dulyup/yelp-campsite"
+    "url": "git+https://github.com/Gsync/YelpCamp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dulyup/yelp-campsite/issues"
   },
-  "homepage": "https://github.com/dulyup/yelp-campsite#readme",
+  "homepage": "http://13.59.255.176:3000/",
   "dependencies": {
     "body-parser": "^1.14.1",
     "comments": "^0.3.6",
