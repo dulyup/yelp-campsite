@@ -1,6 +1,6 @@
 //all the middleware
-var Comment = require("../models/comment");
-var Campground = require("../models/campground");
+const Comment = require("../models/comment");
+const Campground = require("../models/campground");
 module.exports = {
     isLoggedIn: function(req, res, next){
         if(req.isAuthenticated()){
@@ -16,7 +16,6 @@ module.exports = {
                     next();
                 } else {
                     req.flash("error", "You don't have permission to do that!");
-                    console.log("BADD!!!");
                     res.redirect("/campgrounds/" + req.params.id);
                 }
             });
@@ -41,4 +40,4 @@ module.exports = {
             res.redirect("login");
         }
     }
-}
+};

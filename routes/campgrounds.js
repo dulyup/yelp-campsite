@@ -1,8 +1,8 @@
-var express = require("express");
-var router  = express.Router();
-var Campground = require("../models/campground");
-var middleware = require("../middleware");
-var request = require("request");
+const express = require("express");
+const router = express.Router();
+const Campground = require("../models/campground");
+const middleware = require("../middleware");
+const request = require("request");
 
 //INDEX - show all campgrounds
 router.get("/", function(req, res){
@@ -12,7 +12,7 @@ router.get("/", function(req, res){
             console.log(err);
         } else {
             request('https://maps.googleapis.com/maps/api/geocode/json?address=sardine%20lake%20ca&key=AIzaSyBtHyZ049G_pjzIXDKsJJB5zMohfN67llM', function (error, response, body) {
-                if (!error && response.statusCode == 200) {
+                if (!error && response.statusCode === 200) {
                     console.log(body); // Show the HTML for the Modulus homepage.
                     res.render("campgrounds/index",{campgrounds:allCampgrounds});
 
@@ -25,14 +25,14 @@ router.get("/", function(req, res){
 //CREATE - add new campground to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
     // get data from form and add to campgrounds array
-    var name = req.body.name;
-    var image = req.body.image;
-    var desc = req.body.description;
-    var author = {
+    const name = req.body.name;
+    const image = req.body.image;
+    const desc = req.body.description;
+    const author = {
         id: req.user._id,
         username: req.user.username
-    }
-    var newCampground = {name: name, image: image, description: desc, author:author}
+    };
+    const newCampground = {name: name, image: image, description: desc, author:author};
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
@@ -57,7 +57,7 @@ router.get("/:id", function(req, res){
         if(err){
             console.log(err);
         } else {
-            console.log(foundCampground)
+            console.log(foundCampground);
             //render show template with that campground
             res.render("campgrounds/show", {campground: foundCampground});
         }
@@ -78,7 +78,7 @@ router.get("/:id/edit", middleware.checkUserCampground, function(req, res){
 });
 
 router.put("/:id", function(req, res){
-    var newData = {name: req.body.name, image: req.body.image, description: req.body.desc};
+    const newData = {name: req.body.name, image: req.body.image, description: req.body.desc};
     Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, campground){
         if(err){
             req.flash("error", err.message);

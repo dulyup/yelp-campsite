@@ -1,4 +1,4 @@
-var express     = require("express"),
+const express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
@@ -6,17 +6,15 @@ var express     = require("express"),
     cookieParser = require("cookie-parser"),
     LocalStrategy = require("passport-local"),
     flash        = require("connect-flash"),
-    Campground  = require("./models/campground"),
-    Comment     = require("./models/comment"),
     User        = require("./models/user"),
     session = require("express-session"),
     seedDB      = require("./seeds"),
     methodOverride = require("method-override");
 
 //requiring routes
-var commentRoutes    = require("./routes/comments"),
+const commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
-    indexRoutes      = require("./routes/index")
+    indexRoutes      = require("./routes/index");
 
 mongoose.connect("mongodb://localhost/yelp_camp_v9");
 app.use(bodyParser.urlencoded({extended: true}));
