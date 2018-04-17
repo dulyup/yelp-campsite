@@ -13,7 +13,7 @@ router.get("/", function(req, res){
         } else {
             request('https://maps.googleapis.com/maps/api/geocode/json?address=sardine%20lake%20ca&key=AIzaSyBtHyZ049G_pjzIXDKsJJB5zMohfN67llM', function (error, response, body) {
                 if (!error && response.statusCode === 200) {
-                    console.log(body); // Show the HTML for the Modulus homepage.
+                    //console.log(body); // Show the HTML for the Modulus homepage.
                     res.render("campgrounds/index",{campgrounds:allCampgrounds});
 
                 }
@@ -39,7 +39,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to campgrounds page
-            console.log(newlyCreated);
+            //console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
     });
@@ -57,7 +57,7 @@ router.get("/:id", function(req, res){
         if(err){
             console.log(err);
         } else {
-            console.log(foundCampground);
+            //console.log(foundCampground);
             //render show template with that campground
             res.render("campgrounds/show", {campground: foundCampground});
         }
@@ -92,13 +92,13 @@ router.put("/:id", function(req, res){
 
 
 //middleware
-// function isLoggedIn(req, res, next){
-//     if(req.isAuthenticated()){
-//         return next();
-//     }
-//     req.flash("error", "You must be signed in to do that!");
-//     res.redirect("/login");
-// }
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    req.flash("error", "You must be signed in to do that!");
+    res.redirect("/login");
+}
 
 module.exports = router;
 

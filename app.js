@@ -1,22 +1,22 @@
-const express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    passport    = require("passport"),
-    cookieParser = require("cookie-parser"),
-    LocalStrategy = require("passport-local"),
-    flash        = require("connect-flash"),
-    User        = require("./models/user"),
-    session = require("express-session"),
-    seedDB      = require("./seeds"),
-    methodOverride = require("method-override");
-
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const cookieParser = require("cookie-parser");
+const LocalStrategy = require("passport-local");
+const flash = require("connect-flash");
+const User = require("./models/user");
+const session = require("express-session");
+const seedDB = require("./seeds");
+const methodOverride = require("method-override");
+const port = process.env.PORT || 3000;
 //requiring routes
-const commentRoutes    = require("./routes/comments"),
-    campgroundRoutes = require("./routes/campgrounds"),
-    indexRoutes      = require("./routes/index");
+const commentRoutes    = require("./routes/comments");
+const campgroundRoutes = require("./routes/campgrounds");
+const indexRoutes      = require("./routes/index");
 
-mongoose.connect("mongodb://localhost/yelp_camp_v9");
+mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -51,7 +51,6 @@ app.use(function(req, res, next){
     next();
 });
 
-
 //=============================
 //=====IMPORT   ROUTES=========
 //=============================
@@ -63,7 +62,9 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 //=============================
 //= App Begins Listening Here =
 //=============================
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(port, process.env.IP, function(){
+    console.log(`Server listening at http://localhost:${port}`);
+    console.log('use Ctrl-C to stop this server');
     console.log("The YelpCamp Server Has Started!");
 });
 

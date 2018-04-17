@@ -6,7 +6,7 @@ module.exports = {
         if(req.isAuthenticated()){
             return next();
         }
-        req.flash("error", "You must be signed in to do that!");
+        req.flash("error", "You must be signed in first!");
         res.redirect("/login");
     },
     checkUserCampground: function(req, res, next){
@@ -20,7 +20,7 @@ module.exports = {
                 }
             });
         } else {
-            req.flash("error", "You need to be signed in to do that!");
+            req.flash("error", "You need to be signed in first!");
             res.redirect("/login");
         }
     },
@@ -36,8 +36,8 @@ module.exports = {
                 }
             });
         } else {
-            req.flash("error", "You need to be signed in to do that!");
-            res.redirect("login");
+            req.flash("error", "You need to be signed first!");
+            res.redirect("/login");
         }
     }
 };
